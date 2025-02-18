@@ -33,4 +33,47 @@ const login = asyncHandler(async (req, res ) => {
     }
 })
 
-module.exports = {login, signup};
+
+const logout = asyncHandler(async(req, res)=> {
+    res.clearCookie('uid').send("logged out successfully")
+})
+
+
+const getAllUsers = asyncHandler(async (req, res)=>{
+    try {
+        const users = await User.find()
+        res.send(users)
+    } catch (error) {
+        res.status(400);
+        console.log(error)
+        throw new Error (error.message)
+    }
+})
+
+const updateUser = asyncHandler(async(req, res)=> {
+    try {
+        const userid = req.params.userid
+        const user = await User.findOneAndUpdate({_id:userid}, req.body , {new: true})
+        if (!user){
+            res.status(404).send("User not found")
+        }
+        res.send("details updated")
+    } catch (error) {
+        
+    }
+})
+
+const deleteUser = asyncHandler(async(req,res)=> {
+    try {
+        const userid = req.params.userid
+        const user = await User.findOneAndDelete({_id:userid})
+        if (!user){
+            res.status(404).send("User not found")
+        }
+        res.send("user deleted")
+    } catch (error) {
+        
+    }
+})
+
+module.exports = {login, signup, logout, getAllUsers, updateUser, deleteUser};

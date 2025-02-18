@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {getItemByCategory, getItemById, getItemBySubCategory, getItems, postItem, updateItem, searchItem} = require('../controllers/item')
+const {getItemByCategory, getItemById, getItemBySubCategory, getItems, postItem, updateItem, searchItem, deleteItem} = require('../controllers/item')
 
 
 
@@ -20,6 +20,8 @@ router.get("/:category/:subCategory/items/:itemid", getItemById)
 router.post("/item", postItem)
 
 router.patch('/:category/:subCategory/items/:itemid' , updateItem)
+
+router.delete('/items/:itemid', deleteItem)
 
 
 

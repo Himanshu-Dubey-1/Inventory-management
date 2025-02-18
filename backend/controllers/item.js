@@ -89,6 +89,18 @@ const searchItem = asyncHandler(async (req, res) => {
     }
 })
 
+const deleteItem = asyncHandler(async (req, res) => {
+    try {
+        const id = req.params.itemid
+        const item = await Item.findByIdAndDelete(id)
+        res.send(item)
+    } catch (error) {
+        res.status(400);
+        console.log(error)
+        throw new Error (error.message)
+    }
+})
 
-module.exports = { getItems, getItemById, getItemByCategory, getItemBySubCategory, postItem, updateItem, searchItem }
+
+module.exports = { getItems, getItemById, getItemByCategory, getItemBySubCategory, postItem, updateItem, searchItem, deleteItem }
 

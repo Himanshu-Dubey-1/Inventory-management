@@ -5,7 +5,8 @@ const privatekey = "Lufy@123"
 const setuser = ( user) => {
     return jwt.sign({
         _id: user._id,
-        email: user.email
+        email: user.email,
+        role: user.role
     }, privatekey)
 }
 

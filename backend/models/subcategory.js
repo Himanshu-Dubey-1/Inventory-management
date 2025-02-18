@@ -4,11 +4,11 @@ const {Schema} = mongoose;
 
 const subcategorySchema = new Schema({
     Name: String,
-    Image: String,
     Description: String,
-    TaxApplicability: Boolean,
-    Tax: Number,
-    Category: String
+    Category: {
+        type: Schema.Types.ObjectId,
+        ref: "category"
+    }
 })
 
 exports.subcategory = mongoose.model('subcategory', subcategorySchema)
