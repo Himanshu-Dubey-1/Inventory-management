@@ -1,6 +1,44 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { IRegisterFormData } from "../models/IRegisterFormData";
+import { useState } from "react";
+import axios from "axios";
 
  const SignUp = () => {
+
+  const[registerForm, setRegisterForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+  } as IRegisterFormData
+  );
+  const navigate = useNavigate();
+
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setRegisterForm((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+
+  const onHandleSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const req = {
+      username: registerForm.username,
+      email: registerForm.email,
+      password: registerForm.password,
+    };
+    try {
+      console.log(req);
+      const response = await axios.post("http://localhost:5000/signup", req);
+      console.log(response.data);
+      // localStorage.setItem("user",response.data)
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
   return (
@@ -13,18 +51,20 @@ import { Link } from "react-router-dom";
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="/Login" method="get" className="space-y-6">
+          <form onSubmit={onHandleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="Username" className="block text-sm/6 font-medium text-gray-900">
+              <label htmlFor="username" className="block text-sm/6 font-medium text-gray-900">
               Username
               </label>
               <div className="mt-2">
                 <input
-                  id="Username"
-                  name="Username"
-                  type="Username"
+                  value={registerForm.username}
+                  onChange={onChangeHandler}
+                  id="username"
+                  name="username"
+                  type="text"
                   required
-                  autoComplete="Username"
+                  autoComplete="username"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -35,6 +75,8 @@ import { Link } from "react-router-dom";
               </label>
               <div className="mt-2">
                 <input
+                  value={registerForm.email}
+                  onChange={onChangeHandler}
                   id="email"
                   name="email"
                   type="email"
@@ -53,6 +95,8 @@ import { Link } from "react-router-dom";
               </div>
               <div className="mt-2">
                 <input
+                  value={registerForm.password}
+                  onChange={onChangeHandler}
                   id="password"
                   name="password"
                   type="password"

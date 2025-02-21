@@ -1,6 +1,53 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { ILoginFormData } from "../models/ILoginFormData";
+import { toast } from "react-toastify";
 
 const Login = () => {
+
+  const [formData, setFormData] = useState<ILoginFormData>({
+    email: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const {name , value} = event.target
+    setFormData((prevState) => ({
+        ...prevState,
+        [name]:value,
+      }));
+  }
+
+  const onHandleSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const req = {
+      email: formData.email,
+      password: formData.password,
+    };
+    try {
+      console.log(req);
+      const response = await axios.post("http://localhost:5000/login", req , {withCredentials: true});
+      
+      if (response.data.success) {
+        navigate(response.data.redirectUrl);
+        toast.warning("user doesn't exist")
+      }
+      else if(response.data.passwordNotMatch){
+        toast.warning("Please enter correct password");
+      }
+      else{
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 mt-14">
@@ -11,13 +58,15 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="/" method="get" className="space-y-6">
+          <form onSubmit={onHandleSubmit} className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                 Email address
               </label>
               <div className="mt-2">
                 <input
+                  value = {formData.email}
+                  onChange={onChangeHandler}
                   id="email"
                   name="email"
                   type="email"
@@ -41,6 +90,8 @@ const Login = () => {
               </div>
               <div className="mt-2">
                 <input
+                  value = {formData.password}
+                  onChange={onChangeHandler}
                   id="password"
                   name="password"
                   type="password"

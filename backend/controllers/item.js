@@ -54,7 +54,7 @@ const getItemBySubCategory = asyncHandler(async (req, res) => {
 const postItem = asyncHandler(async (req, res) => {  
     const item = new Item(req.body)
     try {
-        await item.save()
+        await Item.create(item)
         res.send(item)
     } catch (error) {
         res.status(400);

@@ -6,6 +6,7 @@ const items = require('./routes/items')
 const user = require('./routes/user')
 const cookieParser = require('cookie-parser')
 const HandleLoggedUser = require('./middleware/auth')
+const cors = require('cors')
 
 
 connectDB()
@@ -14,7 +15,10 @@ const server = express()
 server.use(express.json())
 server.use(express.urlencoded({extended: true}))
 server.use(cookieParser())
-
+server.use(cors({
+    origin: "http://localhost:5173", // Allow React frontend
+    credentials: true // Allow cookies to be sent
+  }));
 
 server.use('/', user)
 server.use('/',HandleLoggedUser, categoryapi)

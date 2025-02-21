@@ -2,22 +2,23 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
 const itemSchema = new mongoose.Schema({
-    Name: String,
-    CategoryId: {
+    name: String,
+    categoryId: {
         type: Schema.Types.ObjectId,
         ref: "category"
     },
-    SubCategoryId: {
+    subCategoryId: {
         type: Schema.Types.ObjectId,
         ref: "subcategory"
     },
-    Price: Number,
-    Quantity: Number,
-    SupplierId: {
+    price: Number,
+    quantity: Number,
+    image: String,
+    supplierId: {
         type: Schema.Types.ObjectId,
         ref: "supplier"
     },
-    CreatedAt: { type: Date, default: Date.now}
+    createdAt: { type: Date, default: Date.now}
 })
 
 exports.item = mongoose.model('item', itemSchema)
