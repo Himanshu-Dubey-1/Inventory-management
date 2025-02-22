@@ -9,7 +9,7 @@ const navbar = (props: Props) => {
       <div className="flex items-center justify-around bg-[#D5C6E0]">
         <div className="flex w-full justify-center items-center text-black px-4 py-3">
           
-          <form action="/about" method="get" className="flex gap-5 mx-5">
+          <form action="/" method="get" className="flex gap-5 mx-5">
             <input
               type="text"
               placeholder="Search"
