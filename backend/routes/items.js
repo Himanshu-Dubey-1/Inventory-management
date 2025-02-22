@@ -19,7 +19,7 @@ router.get("/:category/:subCategory/items/:itemid", getItemById)
 
 router.post("/item", postItem)
 
-router.patch('/:category/:subCategory/items/:itemid' , updateItem)
+router.patch('/:itemid' , updateItem)
 
 router.delete('/items/:itemid', deleteItem)
 

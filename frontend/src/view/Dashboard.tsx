@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   const getallusers = async () => {
     try {
-      const user = await axios.get("http://localhost:5000/users")
+      const user = await axios.get("http://localhost:5000/users", {withCredentials: true})
       if(!user){
         allctx.setUsers([] as IUser[])
         toast.error("Error Occured while fetching users")

@@ -8,6 +8,8 @@ import Products from "../view/Products";
 import Inventory from "../view/Inventory";
 import Dashboard from "../view/Dashboard";
 import Users from "../view/Users";
+import ProtectedRoute from "./protectedroute";
+import NotFound from '../components/NotFount'
 
 const router = createBrowserRouter([
     // {
@@ -20,27 +22,51 @@ const router = createBrowserRouter([
       children: [
         {
           index: true,
-          element: <Home />,
+          element: (
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "about",
-          element: <About />,
+          element: (
+            <ProtectedRoute>
+              <About />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "products",
-          element: <Products />,
+          element: (
+            <ProtectedRoute>
+              <Products />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "users",
-          element: <Users />,
+          element: (
+            <ProtectedRoute>
+              <Users />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "inventory",
-          element: <Inventory />,
+          element: (
+            <ProtectedRoute>
+              <Inventory />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "dashboard",
-          element: <Dashboard />,
+          element: (
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          ),
         },
       ],
     },
@@ -51,6 +77,10 @@ const router = createBrowserRouter([
     {
       path: "/Login",
       element: <Login />,
+    },
+    {
+      path: "*",
+      element: <NotFound />,
     },
     
   ]);

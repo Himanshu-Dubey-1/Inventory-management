@@ -27,7 +27,7 @@ const Sidebar = () => {
     <div className="">
       {/* Sidebar */}
       <div
-        className={`bg-gray-600 text-white h-screen p-4 transition-all ${
+        className={`bg-[#AAA1C8] text-white h-screen p-4 transition-all ${
           openctx.isOpen ? "w-64" : "w-64"
         }`}
       >

@@ -7,9 +7,7 @@ import { InventoryProvider } from './context/inventoryProvider'
 
 
 createRoot(document.getElementById('root')!).render(
-    <StrictMode>
       <InventoryProvider>
           <App />
       </InventoryProvider>,
-    </StrictMode>
 )

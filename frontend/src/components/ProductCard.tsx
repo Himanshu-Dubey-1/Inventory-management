@@ -10,15 +10,7 @@ const ProductCard: React.FC<IProps> = ({products}) => {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 sm:py-2 lg:max-w-7xl lg:px-8">
-      <div className="flex justify-between items-center mb-4">
-        <div>
-          <h2 className="text-xl font-semibold text-gray-900">Products</h2>
-          <p className="text-gray-600">A list of all the products available in the Inventory.</p>
-        </div>
-        <button className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
-          Add Product
-        </button>
-      </div>
+      
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {products.map((product) => (

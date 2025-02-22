@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { ILoginFormData } from "../models/ILoginFormData";
 import { toast } from "react-toastify";
@@ -28,7 +28,7 @@ const Login = () => {
       password: formData.password,
     };
     try {
-      console.log(req);
+      // console.log(req);
       const response = await axios.post("http://localhost:5000/login", req , {withCredentials: true});
       
       if (response.data.success) {
@@ -45,6 +45,16 @@ const Login = () => {
       console.log(error);
     }
   };
+
+
+  const deleteCookie = (name: string) => {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+};
+
+  useEffect(()=>{
+    deleteCookie("uid")
+    // console.log("cookie cleared")
+  },[])
 
 
 

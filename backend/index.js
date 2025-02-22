@@ -4,6 +4,7 @@ const categoryapi = require('./routes/category')
 const subCategory = require('./routes/subCategory')
 const items = require('./routes/items')
 const user = require('./routes/user')
+const Register = require('./routes/register')
 const cookieParser = require('cookie-parser')
 const HandleLoggedUser = require('./middleware/auth')
 const cors = require('cors')
@@ -20,7 +21,8 @@ server.use(cors({
     credentials: true // Allow cookies to be sent
   }));
 
-server.use('/', user)
+server.use('/', Register)
+server.use('/',HandleLoggedUser, user)
 server.use('/',HandleLoggedUser, categoryapi)
 server.use('/',HandleLoggedUser, subCategory)
 server.use('/',HandleLoggedUser ,items)
