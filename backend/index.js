@@ -8,8 +8,9 @@ const Register = require('./routes/register')
 const cookieParser = require('cookie-parser')
 const HandleLoggedUser = require('./middleware/auth')
 const cors = require('cors')
+const dotenv = require('dotenv');
 
-
+dotenv.config()
 connectDB()
 
 const server = express()
@@ -29,6 +30,6 @@ server.use('/',HandleLoggedUser ,items)
 
 
 
-server.listen("5000" , (req, res) => {
-    console.log("server is listening on port 5000...."); 
+server.listen(process.env.PORT , (req, res) => {
+    console.log(`server is listening on port ${process.env.PORT}` ); 
 }) 

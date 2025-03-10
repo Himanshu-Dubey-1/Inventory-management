@@ -7,13 +7,13 @@ const navbar = (props: Props) => {
   return (
     <>
       <div className="flex items-center justify-around bg-[#D5C6E0]">
-        <div className="flex w-full justify-center items-center text-black px-4 py-3">
+        <div className="flex w-full justify-center items-center text-blackpx-4 py-3">
           
           <form action="/" method="get" className="flex gap-5 mx-5">
             <input
               type="text"
               placeholder="Search"
-              className="border border-gray-500 bg-white pl-2 pr-20 py-2 rounded-xl"
+              className="border border-gray-500 bg-white pl-2 md:pr-20 py-2 rounded-xl"
             />
             <button
               type="submit"

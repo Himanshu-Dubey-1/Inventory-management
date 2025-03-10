@@ -1,38 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react'
-import UserCard from '../components/UserCard'
-import axios from 'axios';
-import {toast} from 'react-toastify' 
-import { IUser } from '../models/IUser';
-import { inventoryContext } from '../context/inventoryProvider';
+import UserCard from "../components/UserCard";
+import { useAppDispatch, useAppSelector } from "../store/Hooks/hook";
+import { fetchitems } from "../store/slices/items/itemSlice";
+import { fetchusers } from "../store/slices/user/userSlice";
 
 const Users = () => {
-  // const [users, setUsers] = useState([] as IUser[])
+  const dispatch = useAppDispatch();
+  const products = useAppSelector((state) => state.items.items);
+  const users = useAppSelector((state) => state.users.user);
 
-  // const getallusers = async () => {
-  //   try {
-  //     const user = await axios.get("http://localhost:5000/users", {withCredentials: true})
-
-  //     if(!user){
-  //       setUsers([] as IUser[])
-  //       toast.error("Error Occured while fetching users")
-  //     }
-  //     else{setUsers(user.data)}
-  //   } catch (error) {
-  //     console.log(error)
-  //     toast.error("Error Occured while fetching users")
-  //   }
-  // }
-
-  // // get API for users at /users  
-  // useEffect(()=>{
-  //   getallusers()
-  // },[])
-
-  const Userctx = useContext(inventoryContext)
+  if (products.length === 0 && users.length === 0) {
+    dispatch(fetchitems());
+    dispatch(fetchusers());
+  }
 
   return (
-    <div><UserCard users={Userctx.users}/></div>
-  )
-}
+    <div>
+      <UserCard users={users} />
+    </div>
+  );
+};
 
-export default Users
+export default Users;

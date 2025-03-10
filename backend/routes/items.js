@@ -2,7 +2,11 @@ const express = require('express')
 const router = express.Router()
 const {getItemByCategory, getItemById, getItemBySubCategory, getItems, postItem, updateItem, searchItem, deleteItem} = require('../controllers/item')
 
+const multer = require('multer')
 
+// const storage = multer.memoryStorage();
+
+// const upload = multer({storage})
 
 
 // Create , Get , Update Api for Items

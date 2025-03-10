@@ -3,6 +3,7 @@ const model = require("../models/item")
 const Item = model.item
 
 
+
 const getItems = asyncHandler(async (req, res) => {
     try {
         const items = await Item.find()
@@ -52,7 +53,18 @@ const getItemBySubCategory = asyncHandler(async (req, res) => {
 })
 
 const postItem = asyncHandler(async (req, res) => {  
-    const item = new Item(req.body)
+
+
+    const {name, price, quantity, picture} = req.body
+    // const photobase64 = req.file && req.file.buffer.toString('base64')
+    // console.log(photobase64)
+
+    const item = new Item({
+        name: name,
+        price: price,
+        quantity: quantity,
+        picture: picture,
+    })
     try {
         await Item.create(item)
         res.send(item)

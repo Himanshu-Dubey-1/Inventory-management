@@ -10,12 +10,9 @@ import Dashboard from "../view/Dashboard";
 import Users from "../view/Users";
 import ProtectedRoute from "./protectedroute";
 import NotFound from '../components/NotFount'
+import ProductPage from "../view/productPage";
 
 const router = createBrowserRouter([
-    // {
-    //   path: "/",
-    //   element: <Navigate to="/home" replace={true} />,
-    // },
     {
       path: "/",
       element: <MainLayout />,
@@ -41,6 +38,14 @@ const router = createBrowserRouter([
           element: (
             <ProtectedRoute>
               <Products />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: ":id",
+          element: (
+            <ProtectedRoute>
+              <ProductPage />
             </ProtectedRoute>
           ),
         },

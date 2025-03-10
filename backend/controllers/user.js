@@ -6,6 +6,7 @@ const {setuser} = require('../utils/auth')
 const signup = asyncHandler(async (req, res ) => {
     const {username, email, password} = req.body;
     const user = new User({username: username, email: email, password: password});
+    console.log(user)
 
     try {
         const person = await User.create(user);

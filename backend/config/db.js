@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const connectDB = async() =>{
 
-    MONGODB_URI = "mongodb://127.0.0.1:27017/inventory"
+    MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/inventory";
 
     try {
         const conn = await mongoose.connect(MONGODB_URI);

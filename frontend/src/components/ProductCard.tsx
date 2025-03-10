@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {IProduct} from '../models/IProduct'
 import React from 'react'
 
@@ -14,24 +15,26 @@ const ProductCard: React.FC<IProps> = ({products}) => {
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {products.map((product) => (
-            <div key={product._id} className="group relative border border-gray-200 p-2 rounded-md shadow-md">
+            <Link to={`/${product._id}`}  key={product._id}>
+            <div className="group relative border border-gray-200 p-2 rounded-md shadow-md">
               <img
                 alt={"NO Image Found"}
-                src={product.image}
+                src={product.picture}
                 className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-65"
               />
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <a>
+                    <p>
                       <span aria-hidden="true" className="absolute inset-0" />
                       {product.name}
-                    </a>
+                    </p>
                   </h3>
                 </div>
                 <p className="text-sm font-medium text-gray-900">{product.price}</p>
               </div>
             </div>
+            </Link>
           ))}
         </div>
       </div>

@@ -13,7 +13,7 @@ const itemSchema = new mongoose.Schema({
     },
     price: Number,
     quantity: Number,
-    image: String,
+    picture: String,
     supplierId: {
         type: Schema.Types.ObjectId,
         ref: "supplier"

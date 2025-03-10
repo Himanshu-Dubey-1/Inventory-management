@@ -47,14 +47,12 @@ const Login = () => {
   };
 
 
-  const deleteCookie = (name: string) => {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-};
+  
 
-  useEffect(()=>{
-    deleteCookie("uid")
-    // console.log("cookie cleared")
-  },[])
+  // useEffect(()=>{
+  //   deleteCookie("uid")
+  //   // console.log("cookie cleared")
+  // },[])
 
 
 

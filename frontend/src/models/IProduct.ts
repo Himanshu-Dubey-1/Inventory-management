@@ -3,5 +3,5 @@ export type IProduct = {
     name: string;
     price: number;
     quantity: number;
-    image: string;
+    picture: string;
 }

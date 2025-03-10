@@ -1,4 +1,8 @@
+import { useEffect } from "react";
 import { FaCloudUploadAlt, FaExpeditedssl, FaDatabase } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "../store/Hooks/hook";
+import { fetchitems } from "../store/slices/items/itemSlice";
+import { fetchusers } from "../store/slices/user/userSlice";
 
 const features = [
   {
@@ -19,7 +23,24 @@ const features = [
   },
 ]
 
-export default function Example() {
+export default function Home() {
+
+    const dispatch = useAppDispatch();
+    const products = useAppSelector((state) => state.items.items);
+    const users = useAppSelector((state) => state.users.user);
+  
+
+    if (products.length === 0 && users.length === 0) {
+      dispatch(fetchitems());
+      dispatch(fetchusers());
+    }
+
+  // useEffect(() => {
+  //   dispatch(fetchitems());
+  //   dispatch(fetchusers());
+  // }, []);
+
+
   return (
     <div className="overflow-hidden bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">

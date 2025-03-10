@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const privatekey = "Lufy@123"
 
 
 const setuser = ( user) => {
@@ -7,13 +6,13 @@ const setuser = ( user) => {
         _id: user._id,
         email: user.email,
         role: user.role
-    }, privatekey)
+    }, process.env.PRIVATE_KEY)
 }
 
 const getuser = (token) => {
     if(!token) return null
     try {
-        return jwt.verify(token, privatekey)
+        return jwt.verify(token, process.env.PRIVATE_KEY)
     } catch (error) {
         res.send(error)
     }

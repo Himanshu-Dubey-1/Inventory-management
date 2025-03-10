@@ -1,22 +1,24 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { IProduct } from "../models/IProduct";
-import axios from "axios";
-import { inventoryContext } from "../context/inventoryProvider";
+import { useAppDispatch } from "../store/Hooks/hook";
+import { postitem, updateitem } from "../store/slices/items/itemSlice";
+import { toast } from "react-toastify";
 
 interface IProps {
   products: IProduct[];
 }
 
-const UserTable: React.FC<IProps> = ({ products }) => {
-  const Productctx = useContext(inventoryContext);
 
+const UserTable: React.FC<IProps> = ({ products }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     price: "",
     quantity: "",
   });
+  const [pic, setPic] = useState();
   const [updateid, setUpdateid] = useState<string>("");
+  const dispatch = useAppDispatch();
 
   // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,51 +28,29 @@ const UserTable: React.FC<IProps> = ({ products }) => {
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Product Data Submitted:", formData);
     const req = {
       name: formData.name,
       price: formData.price,
       quantity: formData.quantity,
+      picture: pic,
     };
-    try {
-      console.log(req);
-      const response = await axios.post("http://localhost:5000/item", req, {
-        withCredentials: true,
-      });
-      console.log(response.data);
-      Productctx.products.push(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(req)
+    dispatch(postitem(req));
     closeModal();
   };
 
   // Handle Update
 
   const handleUpdate = async () => {
-    console.log("Product Data Submitted:", formData);
     const req = {
       name: formData.name,
       price: formData.price,
       quantity: formData.quantity,
+      id: updateid,
+      picture: pic,
     };
-    try {
-      console.log(req);
-      const response = await axios.patch(
-        `http://localhost:5000/${updateid}`,
-        req,
-        { withCredentials: true }
-      );
-      console.log(response.data);
-      // Productctx.products.map(product => product._id === response.data._id ? {...product , ...response.data}: product)
-      const index = Productctx.products.findIndex((product) => product._id === response.data._id);
-      if (index !== -1) {
-        products[index] = { ...products[index], ...response.data };
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    setUpdateid("")
+    dispatch(updateitem(req));
+    setUpdateid("");
     closeModal();
   };
 
@@ -90,7 +70,6 @@ const UserTable: React.FC<IProps> = ({ products }) => {
   const openModal = () => {
     setIsOpen(true);
     // setUpdateid("")
-
   };
   const closeModal = () => {
     setIsOpen(false);
@@ -99,6 +78,38 @@ const UserTable: React.FC<IProps> = ({ products }) => {
       price: "",
       quantity: "",
     });
+    setUpdateid("");
+  };
+
+  // pic upload
+
+  const postDetails = (pics: File) => {
+    if (pics === undefined) {
+      toast.warning("Please  select an image");
+    }
+
+    if (pics.type == "image/jpeg" || pics.type == "image/png") {
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "inventory-item");
+
+      fetch("https://api.cloudinary.com/v1_1/dmhkvx0tm/image/upload", {
+        method: "POST",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPic(data.url.toString());
+          console.log(data.url.toString());
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("Something Went Wrong");
+        });
+    } else {
+      toast.warning("Please select an image file");
+      return;
+    }
   };
 
   return (
@@ -121,7 +132,7 @@ const UserTable: React.FC<IProps> = ({ products }) => {
 
           {/* Modal */}
           {isOpen && (
-            <div className="fixed inset-0 flex items-center justify-center bg-gray-300">
+            <div className="fixed inset-0 flex items-center justify-center bg-gray-300/70">
               <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
                 <h2 className="text-lg font-semibold mb-4">
                   Enter Product Details
@@ -155,6 +166,21 @@ const UserTable: React.FC<IProps> = ({ products }) => {
                     className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                   />
+                  <input
+                    type="file"
+                    name="picture"
+                    placeholder="image"
+                    onChange={(e) => {
+                      if (e.target.files && e.target.files.length > 0) {
+                        postDetails(e.target.files[0]);
+                      } else {
+                        console.log("No file selected");
+                      }
+                    }}
+                    // accept="image/*"
+                    className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    // required
+                  />
 
                   {/* Buttons */}
                   <div className="flex justify-between mt-4">
@@ -165,20 +191,19 @@ const UserTable: React.FC<IProps> = ({ products }) => {
                     >
                       Cancel
                     </button>
-                    <button
+                    
+                    {updateid ? <button
                       type="button"
                       onClick={handleUpdate}
-                      
                       className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
                     >
                       Update
-                    </button>
-                    <button
+                    </button> : <button
                       type="submit"
                       className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
                     >
                       Submit
-                    </button>
+                    </button>}
                   </div>
                 </form>
               </div>
@@ -188,6 +213,7 @@ const UserTable: React.FC<IProps> = ({ products }) => {
       </div>
 
       <div className="overflow-x-auto">
+        {/* <img src={pic} alt="" /> */}
         <table className="w-full border-collapse">
           <thead className="bg-gray-100">
             <tr>
