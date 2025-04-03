@@ -93,7 +93,7 @@ const UserTable: React.FC<IProps> = ({ products }) => {
       data.append("file", pics);
       data.append("upload_preset", "inventory-item");
 
-      fetch( import.meta.env.CLOUDINARY_URL , {
+      fetch( "https://api.cloudinary.com/v1_1/dmhkvx0tm/image/upload" , {
         method: "POST",
         body: data,
       })
