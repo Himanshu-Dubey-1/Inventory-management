@@ -6,7 +6,7 @@ interface ProtectedRouteProps {
   }
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   // Replace this with your actual authentication check logic.
-  const isAuthenticated = document.cookie
+  const isAuthenticated = document.cookie.includes("uid")
 
   if (!isAuthenticated) {
     // Redirect unauthenticated users to the Login page.

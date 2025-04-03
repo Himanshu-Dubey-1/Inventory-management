@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { IRegisterFormData } from "../models/IRegisterFormData";
 import { useState } from "react";
-import axios from "axios";
+import axiosInstance from "../api/api";
 
  const SignUp = () => {
 
@@ -31,7 +31,7 @@ import axios from "axios";
     };
     try {
       console.log(req);
-      const response = await axios.post("http://localhost:5000/signup", req);
+      const response = await axiosInstance.post("/Signup", req);
       console.log(response.data);
       // localStorage.setItem("user",response.data)
       navigate("/login");

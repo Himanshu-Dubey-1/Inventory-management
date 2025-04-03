@@ -12,11 +12,13 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.3.0",
     "@reduxjs/toolkit": "^2.6.0",
     "@tailwindcss/vite": "^4.0.7",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.8",
+    "guestara": "file:..",
     "react": "^19.0.0",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.0.0",

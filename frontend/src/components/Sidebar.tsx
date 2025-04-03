@@ -41,7 +41,7 @@ const Sidebar = () => {
       >
         <button className="text-white text-xl mb-4 focus:outline-none w-full justify-center flex "
         onClick={() => deispatch(togglesidebar())}>
-          <h1>Logo</h1>
+          <h1>{<FaBars />}</h1>
         </button>
         <hr />
 

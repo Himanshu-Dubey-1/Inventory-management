@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 import { FaCloudUploadAlt, FaExpeditedssl, FaDatabase } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../store/Hooks/hook";
 import { fetchitems } from "../store/slices/items/itemSlice";
@@ -24,6 +24,7 @@ const features = [
 ]
 
 export default function Home() {
+
 
     const dispatch = useAppDispatch();
     const products = useAppSelector((state) => state.items.items);

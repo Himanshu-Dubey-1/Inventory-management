@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import About from "../view/About";
 import Home from "../view/Home";
 import MainLayout from "../layout/MainLayout";
@@ -10,7 +10,7 @@ import Dashboard from "../view/Dashboard";
 import Users from "../view/Users";
 import ProtectedRoute from "./protectedroute";
 import NotFound from '../components/NotFount'
-import ProductPage from "../view/productPage";
+import ProductPage from "../view/ProductPage";
 
 const router = createBrowserRouter([
     {
@@ -21,8 +21,8 @@ const router = createBrowserRouter([
           index: true,
           element: (
             <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
           ),
         },
         {

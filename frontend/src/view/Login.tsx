@@ -1,25 +1,31 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { ILoginFormData } from "../models/ILoginFormData";
 import { toast } from "react-toastify";
+import { useAuth0 } from "@auth0/auth0-react";
+import axiosInstance from "../api/api";
 
 const Login = () => {
+  
+  const { loginWithRedirect} = useAuth0();
 
   const [formData, setFormData] = useState<ILoginFormData>({
     email: "",
     password: "",
   });
 
+
   const navigate = useNavigate();
 
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const {name , value} = event.target
+  const onChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
     setFormData((prevState) => ({
-        ...prevState,
-        [name]:value,
-      }));
-  }
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const onHandleSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,16 +35,13 @@ const Login = () => {
     };
     try {
       // console.log(req);
-      const response = await axios.post("http://localhost:5000/login", req , {withCredentials: true});
-      
+      const response = await axiosInstance.post("/login", req);
       if (response.data.success) {
         navigate(response.data.redirectUrl);
-        toast.warning("user doesn't exist")
-      }
-      else if(response.data.passwordNotMatch){
+        toast.warning("user doesn't exist");
+      } else if (response.data.passwordNotMatch) {
         toast.warning("Please enter correct password");
-      }
-      else{
+      } else {
         navigate("/");
       }
     } catch (error) {
@@ -46,15 +49,10 @@ const Login = () => {
     }
   };
 
-
-  
-
   // useEffect(()=>{
   //   deleteCookie("uid")
   //   // console.log("cookie cleared")
   // },[])
-
-
 
   return (
     <>
@@ -68,12 +66,15 @@ const Login = () => {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={onHandleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
+              <label
+                htmlFor="email"
+                className="block text-sm/6 font-medium text-gray-900"
+              >
                 Email address
               </label>
               <div className="mt-2">
                 <input
-                  value = {formData.email}
+                  value={formData.email}
                   onChange={onChangeHandler}
                   id="email"
                   name="email"
@@ -87,7 +88,10 @@ const Login = () => {
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
+                <label
+                  htmlFor="password"
+                  className="block text-sm/6 font-medium text-gray-900"
+                >
                   Password
                 </label>
                 {/* <div className="text-sm">
@@ -98,7 +102,7 @@ const Login = () => {
               </div>
               <div className="mt-2">
                 <input
-                  value = {formData.password}
+                  value={formData.password}
                   onChange={onChangeHandler}
                   id="password"
                   name="password"
@@ -120,18 +124,31 @@ const Login = () => {
             </div>
           </form>
 
+          <div className="relative mt-5 items-center flex flex-col justify-center">
+            <p className="bg-white px-4 text-sm/6 font-semibold text-gray-900 mb-5">
+              Or continue with
+            </p>
+            <button
+             onClick={() => loginWithRedirect()}
+             className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold border shadow-xs hover:bg-gray-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              Google
+            </button>
+            <p>Google Auth isn't working for now </p>
+          </div>
+
           <p className="mt-10 text-center text-sm/6 text-gray-500">
-            Not a member?{' '}
-            <Link to="/SignUp" className="font-semibold text-indigo-600 hover:text-indigo-500">
+            Not a member?{" "}
+            <Link
+              to="/SignUp"
+              className="font-semibold text-indigo-600 hover:text-indigo-500"
+            >
               Signup now
             </Link>
           </p>
         </div>
       </div>
     </>
-  )
-}
-
-
+  );
+};
 
 export default Login;

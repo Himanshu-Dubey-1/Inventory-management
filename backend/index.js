@@ -9,25 +9,34 @@ const cookieParser = require('cookie-parser')
 const HandleLoggedUser = require('./middleware/auth')
 const cors = require('cors')
 const dotenv = require('dotenv');
+const path = require('path')
 
 dotenv.config()
 connectDB()
 
 const server = express()
+
+const _dirname = path.resolve()
+
 server.use(express.json())
 server.use(express.urlencoded({extended: true}))
 server.use(cookieParser())
 server.use(cors({
-    origin: "http://localhost:5173", // Allow React frontend
-    credentials: true // Allow cookies to be sent
+    origin: process.env.CLIENT_URL, 
+    credentials: true 
   }));
 
-server.use('/', Register)
-server.use('/',HandleLoggedUser, user)
-server.use('/',HandleLoggedUser, categoryapi)
-server.use('/',HandleLoggedUser, subCategory)
-server.use('/',HandleLoggedUser ,items)
+server.use('/api', Register)
+server.use('/api',HandleLoggedUser, user)
+server.use('/api',HandleLoggedUser, categoryapi)
+server.use('/api',HandleLoggedUser, subCategory)
+server.use('/api',HandleLoggedUser ,items)
 
+
+server.use(express.static(path.join(_dirname, '/frontend/dist'))) 
+server.get('*', (_, res) => {
+    res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"))
+})
 
 
 server.listen(process.env.PORT , (req, res) => {

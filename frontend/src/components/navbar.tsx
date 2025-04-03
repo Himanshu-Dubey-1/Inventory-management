@@ -1,9 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
 
-type Props = {};
-
-const navbar = (props: Props) => {
+const navbar = () => {
   return (
     <>
       <div className="flex items-center justify-around bg-[#D5C6E0]">
@@ -30,12 +26,6 @@ const navbar = (props: Props) => {
             className="inline-block size-10 rounded-full ring-2 ring-white"
           />
         </div>
-        {/* <div className="flex gap-4 px-4 py-3 mr-5">
-        <button className="bg-blue-700 rounded-xl text-white px-4 py-2">
-          Logout
-        </button>
-        </div> */}
-        
       </div>
     
     </>

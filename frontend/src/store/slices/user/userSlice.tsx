@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../api/api";
 import { IUser } from "../../../models/IUser";
 import { toast } from "react-toastify";
