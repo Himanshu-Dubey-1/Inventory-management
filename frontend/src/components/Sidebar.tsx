@@ -29,7 +29,14 @@ const Sidebar = () => {
   ];
 
   const deleteCookie = (name: string) => {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    const result = window.confirm("Do you want to continue?");
+    if (result) {
+      alert("You clicked Yes!");
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    } else {
+      alert("You clicked No!");
+    }
+
 };
 
   return (
