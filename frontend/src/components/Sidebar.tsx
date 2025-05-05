@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import {
   FaBars,
   FaBox,
@@ -14,6 +14,7 @@ import {togglesidebar} from "../store/slices/sidebar/sidebarSlice"
 
 const Sidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const togglebutton = useAppSelector((state) => state.sidebar.isOpen);
   const deispatch = useAppDispatch();
@@ -33,6 +34,7 @@ const Sidebar = () => {
     if (result) {
       alert("You clicked Yes!");
       document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+      navigate("/login");
     } else {
       alert("You clicked No!");
     }
@@ -68,11 +70,11 @@ const Sidebar = () => {
               </Link>
             </li>
           ))}
-            <Link to={"/login"} className="flex items-center gap-2 py-2 rounded transition hover:bg-gray-700" onClick={() => deleteCookie("uid")}>  
+            <button className="flex items-center gap-2 py-2 rounded transition hover:bg-gray-700" onClick={() => deleteCookie("uid")}>  
               
               <span className="text-2xl pl-1"><MdOutlineLogout /></span>
               <h2 className={`${togglebutton? "block" : "hidden" }`}> Logout</h2>
-            </Link>
+            </button>
         </ul>
       </div>
     </div>
