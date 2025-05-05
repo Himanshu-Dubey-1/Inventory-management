@@ -30,14 +30,11 @@ const Sidebar = () => {
   ];
 
   const deleteCookie = (name: string) => {
-    const result = window.confirm("Do you want to continue?");
+    const result = window.confirm("Do you want to Logout?");
     if (result) {
-      alert("You clicked Yes!");
       document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
       navigate("/login");
-    } else {
-      alert("You clicked No!");
-    }
+    } else {  }
 
 };
 
