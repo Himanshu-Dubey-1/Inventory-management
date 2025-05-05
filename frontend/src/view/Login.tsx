@@ -2,18 +2,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ILoginFormData } from "../models/ILoginFormData";
 import { toast } from "react-toastify";
-import { useAuth0 } from "@auth0/auth0-react";
 import axiosInstance from "../api/api";
 
 const Login = () => {
   
-  const { loginWithRedirect} = useAuth0();
-
   const [formData, setFormData] = useState<ILoginFormData>({
     email: "",
     password: "",
   });
-
 
   const navigate = useNavigate();
 
@@ -123,18 +119,6 @@ const Login = () => {
               </button>
             </div>
           </form>
-
-          <div className="relative mt-5 items-center flex flex-col justify-center">
-            <p className="bg-white px-4 text-sm/6 font-semibold text-gray-900 mb-5">
-              Or continue with
-            </p>
-            <button
-             onClick={() => loginWithRedirect()}
-             className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold border shadow-xs hover:bg-gray-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-              Google
-            </button>
-            <p>Google Auth isn't working for now </p>
-          </div>
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             Not a member?{" "}
