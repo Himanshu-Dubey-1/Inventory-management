@@ -1,52 +1,38 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  FaBars,
-  FaBox,
-  FaUser,
-  FaShoppingCart,
-  FaInfo,
-  FaChartPie,
-  FaHome
-} from "react-icons/fa";
-import { MdOutlineLogout } from "react-icons/md";
-import { useAppDispatch,useAppSelector } from "../store/Hooks/hook";
-import {togglesidebar} from "../store/slices/sidebar/sidebarSlice"
+import { Link, useLocation } from "react-router-dom";
+import { FaBars, FaUser, FaInfo, FaChartPie, FaHome } from "react-icons/fa";
+import { AiFillProduct } from "react-icons/ai";
+import { MdOutlineInventory } from "react-icons/md";
+
+import { useAppDispatch, useAppSelector } from "../store/Hooks/hook";
+import { togglesidebar } from "../store/slices/sidebar/sidebarSlice";
 
 const Sidebar = () => {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const togglebutton = useAppSelector((state) => state.sidebar.isOpen);
   const deispatch = useAppDispatch();
 
-
   const menuItems = [
-    { name: "Home", path: "/", icon: <FaHome /> },
+    { name: "Home", path: "", icon: <FaHome /> },
     { name: "Dashboard", path: "/dashboard", icon: <FaChartPie /> },
-    { name: "Inventory", path: "/inventory", icon: <FaBox /> },
+    { name: "Inventory", path: "/inventory", icon: <MdOutlineInventory /> },
     { name: "Users", path: "/users", icon: <FaUser /> },
-    { name: "Products", path: "/products", icon: <FaShoppingCart /> },
+    { name: "Products", path: "/products", icon: <AiFillProduct /> },
     { name: "About", path: "/about", icon: <FaInfo /> },
   ];
-
-  const deleteCookie = (name: string) => {
-    const result = window.confirm("Do you want to Logout?");
-    if (result) {
-      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-      navigate("/login");
-    } else {  }
-
-};
 
   return (
     <div className="">
       {/* Sidebar */}
       <div
-        className={`bg-[#AAA1C8] text-white h-screen p-4 transition-all ${
-          togglebutton ? "w-64" : "w-16"}`}
+        className={`bg-gradient-to-b from-blue-300 via-blue-400 to-blue-200 text-white h-screen p-4 pt-7 transition-all ${
+          togglebutton ? "w-64" : "w-16"
+        }`}
       >
-        <button className="text-white text-xl mb-4 focus:outline-none w-full justify-center flex "
-        onClick={() => deispatch(togglesidebar())}>
+        <button
+          className="text-white text-xl mb-4 focus:outline-none w-full justify-center flex "
+          onClick={() => deispatch(togglesidebar())}
+        >
           <h1>{<FaBars />}</h1>
         </button>
         <hr />
@@ -55,7 +41,7 @@ const Sidebar = () => {
           {menuItems.map(({ name, path, icon }) => (
             <li key={name}>
               <Link
-                to={path}
+                to={`/main${path}`}
                 className={`flex items-center gap-2 py-2 rounded transition ${
                   location.pathname === path
                     ? "bg-blue-500"
@@ -63,15 +49,12 @@ const Sidebar = () => {
                 }`}
               >
                 <span className="text-2xl pl-1">{icon}</span>
-                <span className={`${togglebutton? "block" : "hidden" }`}>{name}</span>
+                <span className={`${togglebutton ? "block" : "hidden"}`}>
+                  {name}
+                </span>
               </Link>
             </li>
           ))}
-            <button className="flex items-center gap-2 py-2 rounded transition hover:bg-gray-700" onClick={() => deleteCookie("uid")}>  
-              
-              <span className="text-2xl pl-1"><MdOutlineLogout /></span>
-              <h2 className={`${togglebutton? "block" : "hidden" }`}> Logout</h2>
-            </button>
         </ul>
       </div>
     </div>

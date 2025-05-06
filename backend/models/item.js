@@ -3,6 +3,8 @@ const {Schema} = mongoose;
 
 const itemSchema = new mongoose.Schema({
     name: String,
+    description: String,
+    category: String,
     categoryId: {
         type: Schema.Types.ObjectId,
         ref: "category"

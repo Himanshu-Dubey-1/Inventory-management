@@ -13,6 +13,8 @@ const UserTable: React.FC<IProps> = ({ products }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
+    description: "",
+    category: "",
     price: "",
     quantity: "",
   });
@@ -21,7 +23,7 @@ const UserTable: React.FC<IProps> = ({ products }) => {
   const dispatch = useAppDispatch();
 
   // Handle input change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -30,6 +32,8 @@ const UserTable: React.FC<IProps> = ({ products }) => {
     e.preventDefault();
     const req = {
       name: formData.name,
+      description: formData.description,
+      category: formData.category,
       price: formData.price,
       quantity: formData.quantity,
       picture: pic,
@@ -44,6 +48,8 @@ const UserTable: React.FC<IProps> = ({ products }) => {
   const handleUpdate = async () => {
     const req = {
       name: formData.name,
+      description: formData.description,
+      category: formData.category,
       price: formData.price,
       quantity: formData.quantity,
       id: updateid,
@@ -59,6 +65,8 @@ const UserTable: React.FC<IProps> = ({ products }) => {
   const handleEdit = (product: IProduct) => {
     setFormData({
       name: product.name,
+      description: product.description,
+      category: product.category,
       price: product.price.toString(),
       quantity: product.quantity.toString(),
     });
@@ -75,6 +83,8 @@ const UserTable: React.FC<IProps> = ({ products }) => {
     setIsOpen(false);
     setFormData({
       name: "",
+      description: "",
+      category: "",
       price: "",
       quantity: "",
     });
@@ -149,6 +159,23 @@ const UserTable: React.FC<IProps> = ({ products }) => {
                     required
                   />
                   <input
+                    type="text"
+                    name="category"
+                    placeholder="Category"
+                    value={formData.category}
+                    onChange={handleChange}
+                    className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                  />
+                  <textarea
+                    name="description"
+                    placeholder="Description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                  />
+                  <input
                     type="number"
                     name="price"
                     placeholder="Price"
@@ -218,10 +245,10 @@ const UserTable: React.FC<IProps> = ({ products }) => {
           <thead className="bg-gray-100">
             <tr>
               <th className="text-left px-4 py-3 text-gray-700 font-medium">
-                ProductID
+                Product Name
               </th>
               <th className="text-left px-4 py-3 text-gray-700 font-medium">
-                Product Name
+                Category
               </th>
               <th className="text-left px-4 py-3 text-gray-700 font-medium">
                 Price
@@ -235,8 +262,8 @@ const UserTable: React.FC<IProps> = ({ products }) => {
           <tbody className="divide-y">
             {products.map((products) => (
               <tr key={products._id} className="hover:bg-gray-50">
-                <td className="px-4 py-3 text-gray-900">{products._id}</td>
-                <td className="px-4 py-3 text-gray-500">{products.name}</td>
+                <td className="px-4 py-3 text-gray-900">{products.name}</td>
+                <td className="px-4 py-3 text-gray-500">{products.category}</td>
                 <td className="px-4 py-3 text-gray-500">${products.price}</td>
                 <td className="px-4 py-3 text-gray-500">{products.quantity}</td>
                 <td className="px-4 py-3 text-right">

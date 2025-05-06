@@ -1,46 +1,41 @@
 import { Link } from 'react-router-dom';
 import {IProduct} from '../models/IProduct'
-import React from 'react'
+import React from 'react';
 
 interface IProps {
-  products: IProduct[];
-}
+    products: IProduct[];
+  }
 
-const ProductCard: React.FC<IProps> = ({products}) => {
-
+const ProductCard: React.FC<IProps> = ({ products }) => {
   return (
-    <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 sm:px-6 sm:py-2 lg:max-w-7xl lg:px-8">
-      
-
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {products.map((product) => (
-            <Link to={`/${product._id}`}  key={product._id}>
-            <div className="group relative border border-gray-200 p-2 rounded-md shadow-md">
-              <img
-                alt={"NO Image Found"}
-                src={product.picture}
-                className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-65"
-              />
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                    <p>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {product.name}
-                    </p>
-                  </h3>
-                </div>
-                <p className="text-sm font-medium text-gray-900">{product.price}</p>
-              </div>
-            </div>
-            </Link>
-          ))}
+    <>
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>
+    {products.map((product) =>
+    <div className="max-w-sm rounded-2xl overflow-hidden shadow-lg bg-white">
+      <div className="relative bg-gradient-to-br from-white to-purple-200 p-6">
+        <img src={product.picture} alt={product.name} className="w-full h-48 object-contain" />
+        
+      </div>
+      <div className="p-4">
+        <h3 className="text-lg font-bold">{product.name}</h3>
+        <p className="text-sm text-gray-600 mt-2">{product.description.slice(0,120)} . . .</p>
+        <div className="flex justify-between items-center mt-4">
+          <div className="text-sm">
+            <span className="text-gray-500 font-medium ">PRICE</span>
+            <p className="font-bold text-lg">${product.price.toFixed(2)}</p>
+          </div>
+          <Link to={`/main/${product._id}`}  key={product._id}>
+          <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-md">
+            Details
+          </button>
+          </Link>
         </div>
       </div>
     </div>
-  )
-}
+     )}
+    </div>
+    </>
+  );
+};
 
-
-export default ProductCard
+export default ProductCard;

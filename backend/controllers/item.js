@@ -55,15 +55,17 @@ const getItemBySubCategory = asyncHandler(async (req, res) => {
 const postItem = asyncHandler(async (req, res) => {  
 
 
-    const {name, price, quantity, picture} = req.body
+    const {name, price, quantity, picture, description, category} = req.body
     // const photobase64 = req.file && req.file.buffer.toString('base64')
     // console.log(photobase64)
 
     const item = new Item({
         name: name,
+        category: category,
         price: price,
         quantity: quantity,
         picture: picture,
+        description: description,
     })
     try {
         await Item.create(item)

@@ -1,91 +1,71 @@
-import React from "react";
-
-const About: React.FC = () => {
+const About = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
-      <div className="max-w-6xl bg-white shadow-lg rounded-lg p-8 flex flex-col items-center text-center">
-        {/* Banner Image */}
-        <img
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fblog.dealpos.com%2Fwp-content%2Fuploads%2F2022%2F05%2FInventory-Management.jpg&f=1&nofb=1&ipt=5571e36ca3c76d2b2bc743dafdb6c87496a5b30a91fd5f3b9c7657f26e4ca7f0&ipo=images"
-          alt="Inventory Management"
-          className="w-full h-fit object-cover rounded-md mb-6 shadow-md"
-        />
-
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          About Our Inventory Management Application
+    <div className="max-w-6xl mx-auto p-6 space-y-10">
+      <section className="text-center">
+        <h1 className="text-4xl font-bold mb-4">
+          About Our Inventory Management System
         </h1>
-        <p className="text-gray-600 mb-6">
-          Welcome to our <strong>Inventory Management Application</strong>, a powerful and user-friendly solution designed
-          to help businesses efficiently track, manage, and optimize their inventory operations.
+        <p className="text-lg text-gray-900">
+          Empowering businesses with seamless inventory control, insightful
+          analytics, and efficient operations.
         </p>
+      </section>
 
-        {/* Key Features Section */}
-        <h2 className="text-2xl font-semibold text-gray-700 mt-6 mb-3">
-          Key Features
-        </h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {/* Feature 1 */}
-          <div className="flex items-center space-x-4">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/3043/3043933.png"
-              alt="Real-time Tracking"
-              className="w-16 h-16 object-contain"
-            />
-            <p className="text-gray-600">📦 Real-time Inventory Tracking</p>
-          </div>
-
-          {/* Feature 2 */}
-          <div className="flex items-center space-x-4">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/3063/3063399.png"
-              alt="Barcode Scanning"
-              className="w-16 h-16 object-contain"
-            />
-            <p className="text-gray-600">🔍 Barcode & QR Code Scanning</p>
-          </div>
-
-          {/* Feature 3 */}
-          <div className="flex items-center space-x-4">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/3135/3135706.png"
-              alt="Analytics"
-              className="w-16 h-16 object-contain"
-            />
-            <p className="text-gray-600">📊 Advanced Reporting & Analytics</p>
-          </div>
-
-          {/* Feature 4 */}
-          <div className="flex items-center space-x-4">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/2906/2906276.png"
-              alt="Stock Replenishment"
-              className="w-16 h-16 object-contain"
-            />
-            <p className="text-gray-600">🔄 Automatic Stock Replenishment</p>
-          </div>
+      <section className="grid md:grid-cols-2 gap-8 items-center">
+        <img
+          src="/illustration2.png"
+          alt="Inventory Management"
+          className="rounded-lg shadow-lg"
+        />
+        <div>
+          <h2 className="text-2xl font-semibold mb-2">What We Do</h2>
+          <p className="text-gray-700 ">
+            We provide a smart inventory tracking platform that helps small to
+            large businesses manage their products, monitor stock levels in
+            real-time, and generate powerful reports.
+          </p>
+          <ul className="list-disc list-inside mt-4 text-gray-700">
+            <li>Real-time stock tracking</li>
+            <li>Advanced analytics and reporting</li>
+            <li>Low and out-of-stock alerts</li>
+            <li>Multi-user access & roles</li>
+            <li>Cloud-based & secure</li>
+          </ul>
         </div>
+      </section>
 
-        {/* Our Mission */}
-        <h2 className="text-2xl font-semibold text-gray-700 mt-8 mb-3">
-          Our Mission
-        </h2>
-        <p className="text-gray-600">
-          Our goal is to simplify inventory management, reduce errors, and enhance operational efficiency. We strive to
-          provide a robust, scalable, and intuitive platform that meets the needs of modern businesses.
+      <section className="bg-gray-100  p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
+        <p className="text-gray-700 ">
+          Our mission is to streamline inventory processes and reduce
+          operational chaos. We aim to bring automation and insights to
+          inventory handling so businesses can focus more on growth and less on
+          logistics.
         </p>
+      </section>
 
-        {/* Contact Section */}
-        <h2 className="text-2xl font-semibold text-gray-700 mt-8 mb-3">
-          Get in Touch
-        </h2>
-        <p className="text-gray-600">
-          Have questions or feedback? Contact our support team at{" "}
-          <a href="mailto:support@inventoryapp.com" className="text-blue-500 hover:underline">
-            support@inventoryapp.com
-          </a>
-          .
-        </p>
-      </div>
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Meet the Team</h2>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {["Alice", "Bob", "Charlie"].map((name, i) => (
+            <div key={i} className="bg-gray-50 p-4 rounded shadow text-center">
+              <img
+                src={`https://i.pravatar.cc/150?img=${i + 10}`}
+                alt={name}
+                className="w-24 h-24 rounded-full mx-auto mb-3"
+              />
+              <h3 className="text-lg font-semibold">{name}</h3>
+              <p className="text-sm text-gray-500 ">{`Role: ${
+                name === "Alice"
+                  ? "Product Manager"
+                  : name === "Bob"
+                  ? "Developer"
+                  : "UX Designer"
+              }`}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

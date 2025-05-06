@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import axiosInstance from "../api/api";
 
 const Login = () => {
-  
   const [formData, setFormData] = useState<ILoginFormData>({
     email: "",
     password: "",
@@ -38,65 +37,50 @@ const Login = () => {
       } else if (response.data.passwordNotMatch) {
         toast.warning("Please enter correct password");
       } else {
-        navigate("/");
+        navigate("/main");
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  // useEffect(()=>{
-  //   deleteCookie("uid")
-  //   // console.log("cookie cleared")
-  // },[])
-
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 mt-14">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-            Sign in to your account
-          </h2>
-        </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={onHandleSubmit} className="space-y-6">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                Email address
-              </label>
-              <div className="mt-2">
+      <div className="min-h-screen flex items-center justify-center bg-[#c5d4e6]">
+        <div className="flex flex-col md:flex-row shadow-xl rounded-2xl overflow-hidden w-full max-w-7xl">
+          {/* Left Panel - Form */}
+          <div className="w-full md:w-1/2 bg-white px-10 py-20">
+            <h2 className="text-3xl font-bold text-gray-800 mb-8">
+              Inventory Management
+            </h2>
+            <form className="space-y-6" onSubmit={onHandleSubmit}>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email address
+                </label>
                 <input
+                  type="email"
+                  id="email"
                   value={formData.email}
                   onChange={onChangeHandler}
-                  id="email"
                   name="email"
-                  type="email"
                   required
                   autoComplete="email"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  className="mt-1 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your email"
                 />
               </div>
-            </div>
 
-            <div>
-              <div className="flex items-center justify-between">
+              <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm/6 font-medium text-gray-900"
+                  className="block text-sm font-medium text-gray-700"
                 >
                   Password
                 </label>
-                {/* <div className="text-sm">
-                  <Link to="/about" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </Link>
-                </div> */}
-              </div>
-              <div className="mt-2">
                 <input
                   value={formData.password}
                   onChange={onChangeHandler}
@@ -105,30 +89,43 @@ const Login = () => {
                   type="password"
                   required
                   autoComplete="current-password"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  className="mt-1 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your password"
                 />
               </div>
-            </div>
 
-            <div>
+              <div className="flex justify-end">
+                <a href="#" className="text-sm text-blue-500 hover:underline">
+                  Forgot password?
+                </a>
+              </div>
+
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="w-full bg-blue-700 text-white p-3 rounded-lg font-semibold hover:bg-blue-800 transition"
               >
-                Sign in
+                Log in
               </button>
-            </div>
-          </form>
 
-          <p className="mt-10 text-center text-sm/6 text-gray-500">
-            Not a member?{" "}
-            <Link
-              to="/SignUp"
-              className="font-semibold text-indigo-600 hover:text-indigo-500"
-            >
-              Signup now
-            </Link>
-          </p>
+              <Link to={"/signup"}>
+                <button
+                  type="button"
+                  className="w-full border border-blue-700 text-blue-700 p-3 rounded-lg font-semibold hover:bg-blue-50 transition"
+                >
+                  Sign up
+                </button>
+              </Link>
+            </form>
+          </div>
+
+          {/* Right Panel - Illustration */}
+          <div className="w-full md:w-1/2 bg-white p-8 flex items-center justify-center">
+            <img
+              src="/illustration1.png"
+              alt="Inventory Illustration"
+              className="w-full h-auto object-contain max-h-[500px]"
+            />
+          </div>
         </div>
       </div>
     </>

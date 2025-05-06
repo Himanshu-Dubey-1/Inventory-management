@@ -11,10 +11,15 @@ import Users from "../view/Users";
 import ProtectedRoute from "./protectedroute";
 import NotFound from '../components/NotFount'
 import ProductPage from "../view/ProductPage";
+import LandingPage from "../view/LandingPage";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
     {
-      path: "/",
+      path: "/main",
       element: <MainLayout />,
       children: [
         {
@@ -79,6 +84,7 @@ const router = createBrowserRouter([
       path: "/SignUp",
       element: <Signup />,
     },
+    
     {
       path: "/Login",
       element: <Login />,

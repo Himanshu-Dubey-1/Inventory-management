@@ -74,7 +74,7 @@ export default function Home() {
           className="pr-4">
           <img
             alt="Product screenshot"
-            src="https://tailwindui.com/plus-assets/img/component-images/dark-project-app-screenshot.png"
+            src="/darkHomepageImg.png"
             width={2432}
             height={1442}
             className="w-[17rem] max-w-none rounded-xl shadow-xl sm:w-[57rem]"
