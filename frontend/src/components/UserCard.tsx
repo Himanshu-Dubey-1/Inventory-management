@@ -15,9 +15,9 @@ const UserTable: React.FC<IProps> = ({users}) => {
           <h2 className="text-xl font-semibold text-gray-900">Users</h2>
           <p className="text-gray-600">A list of all the users in your enterprise including their name, email, and role.</p>
         </div>
-        <button className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
+        {/* <button className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
           Add user
-        </button>
+        </button> */}
       </div>
       
       <div className="overflow-x-auto">

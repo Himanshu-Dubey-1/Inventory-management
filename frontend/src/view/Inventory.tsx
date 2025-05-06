@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import InventoryCard from "../components/inventoryCard";
 import { useAppDispatch, useAppSelector } from "../store/Hooks/hook";
 import { fetchitems } from "../store/slices/items/itemSlice";
@@ -14,6 +15,10 @@ const Inventory = () => {
         dispatch(fetchitems());
         dispatch(fetchusers());
       }
+
+      useEffect(() => {
+                window.scrollTo(0, 0)
+              },[])
 
   return (
     <div>

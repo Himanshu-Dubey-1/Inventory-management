@@ -1,10 +1,33 @@
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../store/Hooks/hook";
+import { addItem } from "../store/slices/cart/cartSlice";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { IProduct } from "../models/IProduct";
+import { toast } from "react-toastify";
 
 const ProductPage = () => {
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+            window.scrollTo(0, 0)
+          }, [])
+
+  
+  const handleAddToCart = (product: IProduct) => {
+    dispatch(addItem({ 
+      id: product._id, 
+      title: product.name, 
+      image: product.picture, 
+      quantity: quantity, 
+      price: product.price,
+      category: product.category, 
+
+    }));
+    toast.success("Item added to cart successfully!");
+  }
 
   const products = useAppSelector((state) => state.items.items);
 
@@ -91,7 +114,7 @@ const ProductPage = () => {
             <p className="text-sm text-gray-500">TOTAL PRICE</p>
             <p className="text-xl font-semibold">€{totalPrice}</p>
           </div>
-          <button className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition">
+          <button className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition" onClick={() => handleAddToCart(Product)}>
             🛒 Add to Cart
           </button>
         </div>

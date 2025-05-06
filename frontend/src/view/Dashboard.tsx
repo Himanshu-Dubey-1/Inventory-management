@@ -3,6 +3,7 @@ import { fetchitems } from "../store/slices/items/itemSlice";
 import { fetchusers } from "../store/slices/user/userSlice";
 import DashboardCards from "../components/dashboardCards";
 import StockChart from "../components/stockCharts";
+import { useEffect } from "react";
 
 const Dashboard = () => {
   const dispatch = useAppDispatch();
@@ -14,6 +15,9 @@ const Dashboard = () => {
     dispatch(fetchitems());
     dispatch(fetchusers());
   }
+  useEffect(() => {
+          window.scrollTo(0, 0)
+        },[])
 
   return (
     <>

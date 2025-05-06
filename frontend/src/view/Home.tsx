@@ -3,6 +3,7 @@ import { FaCloudUploadAlt, FaExpeditedssl, FaDatabase } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../store/Hooks/hook";
 import { fetchitems } from "../store/slices/items/itemSlice";
 import { fetchusers } from "../store/slices/user/userSlice";
+import { useEffect } from "react";
 
 const features = [
   {
@@ -35,6 +36,10 @@ export default function Home() {
       dispatch(fetchitems());
       dispatch(fetchusers());
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      },[])
 
   // useEffect(() => {
   //   dispatch(fetchitems());

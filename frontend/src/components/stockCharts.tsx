@@ -20,7 +20,7 @@ const data = [
 const StockChart = () => (
   <div className="bg-white p-4 shadow rounded-lg mt-6">
     <h3 className="font-semibold mb-2">Stock Overview</h3>
-    <div className="flex gap-x-16">
+    <div className="md:flex gap-x-16">
       <ResponsiveContainer width="100%" height={290}>
         <LineChart data={data}>
           <XAxis dataKey="name" />

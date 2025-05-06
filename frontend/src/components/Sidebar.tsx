@@ -4,7 +4,7 @@ import { AiFillProduct } from "react-icons/ai";
 import { MdOutlineInventory } from "react-icons/md";
 
 import { useAppDispatch, useAppSelector } from "../store/Hooks/hook";
-import { togglesidebar } from "../store/slices/sidebar/sidebarSlice";
+import { togglesidebar, togglesidebarOff } from "../store/slices/sidebar/sidebarSlice";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -42,6 +42,7 @@ const Sidebar = () => {
             <li key={name}>
               <Link
                 to={`/main${path}`}
+                onClick={() => deispatch(togglesidebarOff())}
                 className={`flex items-center gap-2 py-2 rounded transition ${
                   location.pathname === path
                     ? "bg-blue-500"
