@@ -1,10 +1,14 @@
 // components/OrderSummary.tsx
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import { Link } from "react-router-dom";
+import { useAppDispatch } from "../store/Hooks/hook";
+import { clearCart } from "../store/slices/cart/cartSlice";
 import { toast } from "react-toastify";
 
 export default function OrderSummary() {
   const { items } = useSelector((state: RootState) => state.cart);
+  const dispatch = useAppDispatch();
   const total = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -32,9 +36,14 @@ export default function OrderSummary() {
             <span>${total}</span>
           </div>
         </div>
-        <button className="bg-green-600 text-white w-full py-2 mt-4 rounded hover:bg-green-700" onClick={() => toast.success("Checkout successful!")}>
+        <Link to="/main/ordersuccess">
+        <button className="bg-green-600 text-white w-full py-2 mt-4 rounded hover:bg-green-700" onClick={() => {
+          dispatch(clearCart());
+          toast.success("Order placed successfully!", {autoClose: 1000}
+          )}}>
           CHECKOUT
         </button>
+        </Link>
       </div>
     </>
   );

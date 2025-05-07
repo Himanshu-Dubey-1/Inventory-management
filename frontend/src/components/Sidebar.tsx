@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaUser, FaInfo, FaChartPie, FaHome } from "react-icons/fa";
 import { AiFillProduct } from "react-icons/ai";
 import { MdOutlineInventory } from "react-icons/md";
-
+import { MdClose } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "../store/Hooks/hook";
 import { togglesidebar, togglesidebarOff } from "../store/slices/sidebar/sidebarSlice";
 
@@ -30,10 +30,10 @@ const Sidebar = () => {
         }`}
       >
         <button
-          className="text-white text-xl mb-4 focus:outline-none w-full justify-center flex "
+          className="text-white text-xl mb-4 focus:outline-none w-full justify-end pr-1 flex "
           onClick={() => deispatch(togglesidebar())}
         >
-          <h1>{<FaBars />}</h1>
+          <h1>{togglebutton?<MdClose /> : <FaBars /> }</h1>
         </button>
         <hr />
 

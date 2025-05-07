@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ILoginFormData } from "../models/ILoginFormData";
 import { toast } from "react-toastify";
 import axiosInstance from "../api/api";
@@ -11,6 +11,7 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
+  const isAuthenticated = document.cookie.includes("uid");
 
   const onChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -43,6 +44,12 @@ const Login = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/main");
+    }
+  });
 
   return (
     <>

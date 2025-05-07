@@ -47,10 +47,10 @@ const AvatarDropdown: React.FC = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-36 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+        <div className="absolute right-0 mt-2 w-36 bg-white border border-gray-200 rounded-md shadow-lg z-50">
           <button
             onClick={() => handleLogout("uid")}
-            className="block w-full text-left px-4 py-2 text-lg font-bold text-blue-800 hover:bg-blue-100"
+            className="block w-full text-left px-4 py-2 text-lg font-bold  text-blue-800 hover:bg-blue-100 z-10"
           >
             Logout
           </button>

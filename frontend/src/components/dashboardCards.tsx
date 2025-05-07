@@ -47,7 +47,7 @@ const DashboardCards = () => {
       {cards.map((card, i) => (
         <div
           key={i}
-          className={`p-4 rounded-lg shadow ${card.color} flex flex-col gap-2`}
+          className={`p-2 sm:p-4 rounded-lg shadow ${card.color} flex flex-col sm:gap-2`}
         >
           <div className="text-2xl">{card.icon}</div>
           <h1 className="text-white text-lg">{card.title}</h1>

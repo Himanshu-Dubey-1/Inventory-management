@@ -26,7 +26,7 @@ const ProductPage = () => {
       category: product.category, 
 
     }));
-    toast.success("Item added to cart successfully!");
+    toast.success("Item added to cart successfully!", {autoClose: 1000});
   }
 
   const products = useAppSelector((state) => state.items.items);

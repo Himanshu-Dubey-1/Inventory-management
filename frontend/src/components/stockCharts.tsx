@@ -34,7 +34,7 @@ const StockChart = () => (
           />
         </LineChart>
       </ResponsiveContainer>
-      <div className="z-10">
+      <div className="z-10 ">
         <img
           src="/illustration.png"
           alt="Inventory Dashboard"

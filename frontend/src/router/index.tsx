@@ -13,6 +13,7 @@ import NotFound from '../components/NotFount'
 import ProductPage from "../view/ProductPage";
 import LandingPage from "../view/LandingPage";
 import Cart from "../view/Cart";
+import OrderSuccess from "../view/OrderProcessed";
 
 
 const router = createBrowserRouter([
@@ -85,6 +86,14 @@ const router = createBrowserRouter([
           element: (
             <ProtectedRoute>
               <Cart />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "ordersuccess",
+          element: (
+            <ProtectedRoute>
+              <OrderSuccess />
             </ProtectedRoute>
           ),
         },

@@ -9,10 +9,10 @@ interface IProps {
 const ProductCard: React.FC<IProps> = ({ products }) => {
   return (
     <>
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 '>
     {products.map((product) =>
     <div className="max-w-sm rounded-2xl overflow-hidden shadow-lg bg-white">
-      <div className="relative bg-gradient-to-br from-white to-purple-200 p-6">
+      <div className="bg-gradient-to-br from-white to-purple-200 p-6">
         <img src={product.picture} alt={product.name} className="w-full h-48 object-contain" />
         
       </div>

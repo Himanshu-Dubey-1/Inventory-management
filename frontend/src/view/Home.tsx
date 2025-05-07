@@ -41,14 +41,9 @@ export default function Home() {
         window.scrollTo(0, 0)
       },[])
 
-  // useEffect(() => {
-  //   dispatch(fetchitems());
-  //   dispatch(fetchusers());
-  // }, []);
-
 
   return (
-    <div className="sm:overflow-hidden bg-white py-24 sm:py-32">
+    <div className="sm:overflow-hidde bg-white py-10 sm:py-15">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="lg:pt-4 lg:pr-8">
@@ -76,13 +71,13 @@ export default function Home() {
             </div>
           </div>
           <div
-          className="pr-4">
+          className="">
           <img
             alt="Product screenshot"
             src="/darkHomepageImg.png"
             width={2432}
             height={1442}
-            className="w-[17rem] max-w-none rounded-xl shadow-xl sm:w-[57rem]"
+            className="w-[17rem] max-w-none rounded-xl shadow-xl sm:w-[44rem] sm:mt-24"
           />
           </div>
         </div>
